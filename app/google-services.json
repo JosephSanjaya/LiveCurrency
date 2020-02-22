@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "906688773762",
+    "firebase_url": "https://live-currency-963e3.firebaseio.com",
+    "project_id": "live-currency-963e3",
+    "storage_bucket": "live-currency-963e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:906688773762:android:7379011f7f8f61fe6a3e9b",
+        "android_client_info": {
+          "package_name": "com.sanjayajoseph.livecurrency"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "906688773762-q62j6m3v6jsvg9b1t8lgl7r3oks84tj9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI8Z-wtP2xRzk-5s5SNAGmMCExYZYntYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "906688773762-q62j6m3v6jsvg9b1t8lgl7r3oks84tj9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
