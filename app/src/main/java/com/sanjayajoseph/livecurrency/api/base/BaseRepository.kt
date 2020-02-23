@@ -1,6 +1,6 @@
 package com.sanjayajoseph.livecurrency.api.base
 
-import com.sanjayajoseph.livecurrency.api.interfaces.APICurrenciesInterface
+import com.sanjayajoseph.livecurrency.api.interfaces.APIInterface
 import com.sanjayajoseph.livecurrency.api.interfaces.ApiCallBack
 import com.sanjayajoseph.livecurrency.api.interfaces.Unsubscribe
 import io.reactivex.Observable
@@ -18,7 +18,7 @@ import io.reactivex.schedulers.Schedulers
 
 
 open class BaseRepository(
-    @PublishedApi internal val service: APICurrenciesInterface,
+    @PublishedApi internal val service: APIInterface,
     @PublishedApi internal val compositeDisposable: CompositeDisposable
 ) : Unsubscribe {
 

@@ -8,6 +8,8 @@ package com.sanjayajoseph.livecurrency.api.models.currencies.entities
 */
 
 data class CurrenciesData(
+    var country: String? = null,
+    var flag: String? = null,
     var symbols: String? = null,
     var value: Double? = null
 )

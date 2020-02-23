@@ -1,7 +1,7 @@
 package com.sanjayajoseph.livecurrency.api.repository
 
 import com.sanjayajoseph.livecurrency.api.base.BaseRepository
-import com.sanjayajoseph.livecurrency.api.interfaces.APICurrenciesInterface
+import com.sanjayajoseph.livecurrency.api.interfaces.APIInterface
 import com.sanjayajoseph.livecurrency.api.interfaces.ApiCallBack
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import io.reactivex.disposables.CompositeDisposable
@@ -13,7 +13,7 @@ import io.reactivex.disposables.CompositeDisposable
 * Github : https://github.com/JosephSanjaya
 */
 
-class CurrenciesRepository(service: APICurrenciesInterface, compositeDisposable: CompositeDisposable) :
+class CurrenciesRepository(service: APIInterface, compositeDisposable: CompositeDisposable) :
     BaseRepository(service, compositeDisposable) {
 
     fun getLatestCurrencyRates(
@@ -24,11 +24,11 @@ class CurrenciesRepository(service: APICurrenciesInterface, compositeDisposable:
         fetchData(service.getLatestCurrencyRates(base, symbols), callback)
     }
     fun getRateByDate(
+        date: String,
         base: String,
         symbols: String,
-        date: String,
         callback: ApiCallBack<CurrenciesResponse>
     ) {
-        fetchData(service.getHistoriesByDate(base, symbols, date), callback)
+        fetchData(service.getHistoriesByDate(date,base, symbols), callback)
     }
 }

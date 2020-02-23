@@ -20,7 +20,9 @@ class CurrenciesViewModel(
     private val currenciesRepository: CurrenciesRepository
 ) : BaseViewModel<CurrenciesRepository>(currenciesRepository) {
     private var currenciesData: MutableLiveData<CurrenciesResponse?> = MutableLiveData()
+    private var dateCurrenciesData: MutableLiveData<CurrenciesResponse?> = MutableLiveData()
     private val currenciesLiveData: LiveData<CurrenciesResponse?> = currenciesData
+    private val dateCurrenciesLiveData: LiveData<CurrenciesResponse?> = dateCurrenciesData
 
     fun getLatestCurrencyRates(base: String, symbols: String) {
         currenciesRepository.getLatestCurrencyRates(base, symbols,
@@ -35,9 +37,25 @@ class CurrenciesViewModel(
                 }
             })
     }
+    fun getCurrencyRatesByDate(date:String, base: String, symbols: String) {
+        currenciesRepository.getRateByDate(date, base, symbols,
+            object : ApiCallBack<CurrenciesResponse> {
+                override fun onError(error: Throwable) {
+                    Timber.tag(Constants.TAG).e(error)
+                    processError(error)
+                }
 
-    fun getLatestCurrencyRates(): LiveData<CurrenciesResponse?> {
+                override fun onSucess(response: CurrenciesResponse) {
+                    dateCurrenciesData.value = response
+                }
+            })
+    }
+
+    fun getCurrencyRates(): LiveData<CurrenciesResponse?> {
         return currenciesLiveData
+    }
+    fun getCurrencyRatesByDate(): LiveData<CurrenciesResponse?> {
+        return dateCurrenciesLiveData
     }
 
 }
