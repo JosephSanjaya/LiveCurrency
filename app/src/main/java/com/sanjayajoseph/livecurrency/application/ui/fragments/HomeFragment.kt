@@ -199,42 +199,49 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadCurrencies(type: String) {
+        val latestCurrencyAction = Runnable {
+            currenciesViewModel.getCurrencyRates().observe(viewLifecycleOwner, Observer {
+                it.let {
+                    if (it != null) {
+                        currenciesData = it
+                    }
+                }
+            })
+            loadYesterdayCurrencies(type, Functions.getYesterdayDate(currenciesData.date!!))
+        }
         Functions.startRecyclerLoading(binding.shimmerViewContainer, binding.srlHome)
         currenciesDataList = ArrayList()
         setupCurrenciesAdapter()
         currenciesViewModel.getLatestCurrencyRates(
             type,
-            ""
+            "",
+            latestCurrencyAction
         )
-        currenciesViewModel.getCurrencyRates().observe(viewLifecycleOwner, Observer {
-            it.let {
-                if (it != null) {
-                    currenciesData = it
-                    loadYesterdayCurrencies(type, Functions.getYesterdayDate(it.date!!))
-                }
-            }
-        })
     }
 
     private fun loadYesterdayCurrencies(type: String, date: String){
+        val yesterdayAction = Runnable {
+            currenciesViewModel.getCurrencyRatesByDate().observe(viewLifecycleOwner, Observer {
+                it.let {
+                    if (it != null) {
+                        yesterdayCurrenciesData = it
+                    }
+                }
+            })
+            currenciesDataList.clear()
+            currenciesDataList.addAll(Functions.bundleDataToArray(currenciesData, yesterdayCurrenciesData, countriesDataList))
+            currenciesDataList.remove(currenciesDataList.find { data -> data.data?.symbols == type })
+            currenciesAdapter.notifyDataSetChanged()
+            Functions.stopRecyclerLoading(binding.shimmerViewContainer, binding.srlHome)
+            if(binding.srlHome.isRefreshing)
+                srlHome.isRefreshing = false
+        }
+
         currenciesViewModel.getCurrencyRatesByDate(
             Functions.getYesterdayDate(date),
-            type, ""
+            type, "",
+            yesterdayAction
         )
-        currenciesViewModel.getCurrencyRatesByDate().observe(viewLifecycleOwner, Observer {
-            it.let {
-                if (it != null) {
-                    yesterdayCurrenciesData = it
-                }
-                currenciesDataList.clear()
-                currenciesDataList.addAll(Functions.bundleDataToArray(currenciesData, yesterdayCurrenciesData, countriesDataList))
-                currenciesDataList.remove(currenciesDataList.find { data -> data.data?.symbols == type })
-                currenciesAdapter.notifyDataSetChanged()
-                Functions.stopRecyclerLoading(binding.shimmerViewContainer, binding.srlHome)
-                if(binding.srlHome.isRefreshing)
-                    srlHome.isRefreshing = false
-            }
-        })
 
     }
 

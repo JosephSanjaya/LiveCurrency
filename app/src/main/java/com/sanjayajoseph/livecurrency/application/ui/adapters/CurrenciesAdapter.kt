@@ -41,7 +41,7 @@ class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
                 helper.setText(R.id.tvSymbol,item?.data?.symbols.toString())
                     .setText(R.id.tvValue,nf.format(item?.data?.value))
                     .setText(R.id.tvDiff,nf.format(item?.diffValue)+ " %")
-                    .setText(R.id.tvStateName,item?.countryData?.name)
+                    .setText(R.id.tvStateName,item?.countryData?.alpha3Code)
                     .setImageDrawable(R.id.ivRates, ContextCompat.getDrawable(mContext, R.drawable.ic_trending_down))
                     .setTextColor(R.id.tvDiff, ContextCompat.getColor(mContext, R.color.colorRed))
                 try {
@@ -64,7 +64,7 @@ class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
                 helper.setText(R.id.tvSymbol,item?.data?.symbols.toString())
                     .setText(R.id.tvValue,nf.format(item?.data?.value))
                     .setText(R.id.tvDiff,nf.format(item?.diffValue)+ " %")
-                    .setText(R.id.tvStateName,item?.countryData?.name)
+                    .setText(R.id.tvStateName,item?.countryData?.alpha3Code)
                     .setImageDrawable(R.id.ivRates, ContextCompat.getDrawable(mContext, R.drawable.ic_trending_up))
                     .setTextColor(R.id.tvDiff, ContextCompat.getColor(mContext, R.color.colorGreen))
                 try {

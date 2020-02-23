@@ -49,4 +49,6 @@ object Constants {
     const val HOME_CURRENCIES_TYPE_DOWN = 0
     const val HOME_CURRENCIES_TYPE_UP = 1
     const val API_DATE_FORMAT = "yyyy-MM-dd"
+    const val FREE_TYPE = "free"
+    const val PREMIUM_TYPE = "premium"
 }

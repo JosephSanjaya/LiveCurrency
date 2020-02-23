@@ -24,29 +24,33 @@ class CurrenciesViewModel(
     private val currenciesLiveData: LiveData<CurrenciesResponse?> = currenciesData
     private val dateCurrenciesLiveData: LiveData<CurrenciesResponse?> = dateCurrenciesData
 
-    fun getLatestCurrencyRates(base: String, symbols: String) {
+    fun getLatestCurrencyRates(base: String, symbols: String,latestCurrencyAction: Runnable) {
         currenciesRepository.getLatestCurrencyRates(base, symbols,
             object : ApiCallBack<CurrenciesResponse> {
                 override fun onError(error: Throwable) {
                     Timber.tag(Constants.TAG).e(error)
                     processError(error)
+                    latestCurrencyAction.run()
                 }
 
                 override fun onSucess(response: CurrenciesResponse) {
                     currenciesData.value = response
+                    latestCurrencyAction.run()
                 }
             })
     }
-    fun getCurrencyRatesByDate(date:String, base: String, symbols: String) {
+    fun getCurrencyRatesByDate(date:String, base: String, symbols: String, yesterdayAction: Runnable) {
         currenciesRepository.getRateByDate(date, base, symbols,
             object : ApiCallBack<CurrenciesResponse> {
                 override fun onError(error: Throwable) {
                     Timber.tag(Constants.TAG).e(error)
                     processError(error)
+                    yesterdayAction.run()
                 }
 
                 override fun onSucess(response: CurrenciesResponse) {
                     dateCurrenciesData.value = response
+                    yesterdayAction.run()
                 }
             })
     }

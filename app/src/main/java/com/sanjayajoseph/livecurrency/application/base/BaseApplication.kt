@@ -3,12 +3,14 @@ package com.sanjayajoseph.livecurrency.application.base
 import androidx.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
+import com.google.android.gms.ads.MobileAds
 import com.orhanobut.hawk.Hawk
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.sanjayajoseph.livecurrency.BuildConfig
+import com.sanjayajoseph.livecurrency.application.common.Constants
 import com.sanjayajoseph.livecurrency.application.common.Modules
 import io.fabric.sdk.android.Fabric
 import net.danlew.android.joda.JodaTimeAndroid
