@@ -49,11 +49,11 @@
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/values_medium"
             android:gravity="end"
+            android:layout_marginEnd="@dimen/values_regular"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivRates"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
@@ -95,12 +95,12 @@
             android:id="@+id/ivRates"
             android:layout_width="@dimen/values_large"
             android:layout_height="@dimen/values_large"
+            android:contentDescription="@string/up_and_down_graph"
             android:src="@drawable/ic_trending_up"
-            android:layout_marginEnd="@dimen/values_regular"
+            android:layout_marginEnd="@dimen/values_medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/up_and_down_graph" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

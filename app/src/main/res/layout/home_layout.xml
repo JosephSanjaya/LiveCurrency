@@ -15,6 +15,7 @@
             android:layout_marginBottom="@dimen/_8sdp">
 
             <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_gravity="end"
                 app:neomorph_view_type="circular"
