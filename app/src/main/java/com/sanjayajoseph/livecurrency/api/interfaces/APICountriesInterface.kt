@@ -1,10 +1,13 @@
 package com.sanjayajoseph.livecurrency.api.interfaces
 
 import android.content.Context
+import com.sanjayajoseph.livecurrency.api.models.countries.CountriesResponse
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import com.sanjayajoseph.livecurrency.api.services.APIService
 import com.squareup.okhttp.ResponseBody
 import io.reactivex.Observable
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -29,4 +32,19 @@ interface APICountriesInterface {
             return baseService.retrofit.create(APICountriesInterface::class.java)
         }
     }
+
+    @GET("currency/{currency}")
+    fun getCountryByCurrency(
+        @Path("currency") currency: String
+    ): Call<ArrayList<CountriesResponse>>
+
+    @GET("all")
+    fun getCountries(
+    ): Call<ArrayList<CountriesResponse>>
+
+    @GET("alpha")
+    fun getCountriesByAlpha(
+        @Query("codes") codes: String
+    ): Call<ArrayList<CountriesResponse>>
+
 }
