@@ -9,8 +9,8 @@ package com.sanjayajoseph.livecurrency.application.common
 
 object Constants {
     const val TAG = "Live Currency"
-    const val CONNECTIVITY_ON = "Online Kembali"
-    const val CONNECTIVITY_OFF = "Kamu Sedang Offline"
+    const val CONNECTIVITY_ON = "Back Online"
+    const val CONNECTIVITY_OFF = "You are offline"
     const val CANADIAN_CURRENCY = "CAD"
     const val HONGKONG_CURRENCY = "HKD"
     const val ICELANDIC_CURRENCY = "ISK"
@@ -44,4 +44,9 @@ object Constants {
     const val ISRAEL_CURRENCY = "ILS"
     const val SOUTH_KOREAN_CURRENCY = "KRW"
     const val POLAND_CURRENCY = "PLN"
+
+    const val COUNTRIES_SUPPORTED_CODES = "CA;HK;IS;PH;DK;HU;CZ;GB;RO;SE;ID;IN;BR;RU;HR;JP;TH;CH;EU;DE;MY;BG;TR;CN;NO;NZ;ZA;US;MX;SG;AU;IL;KR;PL"
+    const val HOME_CURRENCIES_TYPE_DOWN = 0
+    const val HOME_CURRENCIES_TYPE_UP = 1
+    const val API_DATE_FORMAT = "yyyy-MM-dd"
 }
