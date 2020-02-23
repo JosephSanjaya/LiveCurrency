@@ -3,15 +3,15 @@ package com.sanjayajoseph.livecurrency.application.base
 import androidx.multidex.MultiDexApplication
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.orhanobut.hawk.Hawk
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 import com.sanjayajoseph.livecurrency.BuildConfig
-import com.sanjayajoseph.livecurrency.application.modules.AppModule
+import com.sanjayajoseph.livecurrency.application.common.Modules
 import io.fabric.sdk.android.Fabric
+import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -29,7 +29,6 @@ class BaseApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         Hawk.init(this).build()
-        Fresco.initialize(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(object : Timber.DebugTree() {
                 override fun log(
@@ -52,13 +51,12 @@ class BaseApplication : MultiDexApplication() {
             .core(CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
             .build()
         Fabric.with(this, crashlyticsKit)
-
+        JodaTimeAndroid.init(this);
         startKoin {
             androidLogger()
             androidContext(applicationContext)
-            modules(listOf(AppModule))
+            modules(listOf(Modules.AppModule))
         }
-
     }
 
 }

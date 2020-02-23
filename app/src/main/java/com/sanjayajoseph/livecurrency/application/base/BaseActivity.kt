@@ -1,6 +1,7 @@
 package com.sanjayajoseph.livecurrency.application.base
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,7 +12,6 @@ import com.sanjayajoseph.livecurrency.application.common.Constants
 import com.sanjayajoseph.livecurrency.databinding.BaseContainerBinding
 import com.sanjayajoseph.livecurrency.services.internetmanager.InternetManager
 import com.sanjayajoseph.livecurrency.services.internetmanager.other.Monitor
-
 
 /*
 * @author Joseph Sanjaya on 2/22/2020.
