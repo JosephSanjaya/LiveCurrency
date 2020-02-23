@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_elevation">8dp</dimen>
+    <dimen name="default_radius">8dp</dimen>
+    <dimen name="font_large">@dimen/_19ssp</dimen>
+    <dimen name="font_medium">@dimen/_15ssp</dimen>
+    <dimen name="font_regular">@dimen/_12ssp</dimen>
+    <dimen name="font_regular_large">@dimen/_13ssp</dimen>
+    <dimen name="font_regular_medium">@dimen/_11ssp</dimen>
+    <dimen name="font_regular_small">@dimen/_9ssp</dimen>
+    <dimen name="values_xxxxlarge">@dimen/_65sdp</dimen>
+    <dimen name="values_xxxlarge">@dimen/_60sdp</dimen>
+    <dimen name="values_xxlarge">@dimen/_50sdp</dimen>
+    <dimen name="values_xlarge2">@dimen/_48sdp</dimen>
+    <dimen name="values_xlarge">@dimen/_32sdp</dimen>
+    <dimen name="values_large2">@dimen/_28sdp</dimen>
+    <dimen name="values_large">@dimen/_24sdp</dimen>
+    <dimen name="values_medium">@dimen/_16sdp</dimen>
+    <dimen name="values_medium2">@dimen/_15sdp</dimen>
+    <dimen name="values_regular">@dimen/_8sdp</dimen>
+    <dimen name="values_small">@dimen/_4sdp</dimen>
+    <dimen name="values_xsmall">@dimen/_5sdp</dimen>
+    <dimen name="values_regular_">@dimen/_10sdp</dimen>
+</resources>

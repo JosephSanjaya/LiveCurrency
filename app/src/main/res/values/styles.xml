@@ -1,11 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/riviera</item>
+        <item name="fontFamily">@font/riviera</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="FadeDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/enter_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/enter_fade_out</item>
     </style>
 
 </resources>
