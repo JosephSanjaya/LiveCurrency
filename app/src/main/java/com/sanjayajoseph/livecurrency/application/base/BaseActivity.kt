@@ -1,18 +1,12 @@
 package com.sanjayajoseph.livecurrency.application.base
 
 import android.app.Activity
-import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
-import android.view.View
-import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.sanjayajoseph.livecurrency.BuildConfig
@@ -41,10 +35,8 @@ class BaseActivity : AppCompatActivity() {
         setupAds()
     }
 
-    private fun setupAds()
-    {
-        if(BuildConfig.TYPE == Constants.FREE_TYPE)
-        {
+    private fun setupAds() {
+        if (BuildConfig.TYPE == Constants.FREE_TYPE) {
             MobileAds.initialize(this) {}
             adView.visibility = VISIBLE
             val adRequest = AdRequest.Builder().build()

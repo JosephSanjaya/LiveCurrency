@@ -1,11 +1,11 @@
 package com.sanjayajoseph.livecurrency.api.services
 
 import android.content.Context
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -51,7 +51,7 @@ class APIService(baseUrl: String, context: Context) {
     internal val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .addConverterFactory(JacksonConverterFactory.create())
         .build()
 

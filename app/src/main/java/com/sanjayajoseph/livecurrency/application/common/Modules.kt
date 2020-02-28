@@ -3,9 +3,10 @@ package com.sanjayajoseph.livecurrency.application.common
 import com.sanjayajoseph.livecurrency.BuildConfig
 import com.sanjayajoseph.livecurrency.api.interfaces.APICountriesInterface
 import com.sanjayajoseph.livecurrency.api.interfaces.APIInterface
+import com.sanjayajoseph.livecurrency.api.repository.CountriesRepository
 import com.sanjayajoseph.livecurrency.api.repository.CurrenciesRepository
+import com.sanjayajoseph.livecurrency.application.viewmodel.CountriesViewModel
 import com.sanjayajoseph.livecurrency.application.viewmodel.CurrenciesViewModel
-import io.reactivex.disposables.CompositeDisposable
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -31,14 +32,21 @@ object Modules {
                 androidContext()
             )
         }
-        single {
-            CurrenciesRepository(
-                get(),
-                CompositeDisposable()
-            )
+
+        factory {
+            CurrenciesRepository(get())
         }
+
+        factory {
+            CountriesRepository(get())
+        }
+
         viewModel {
             CurrenciesViewModel(get())
+        }
+
+        viewModel {
+            CountriesViewModel(get())
         }
     }
 }

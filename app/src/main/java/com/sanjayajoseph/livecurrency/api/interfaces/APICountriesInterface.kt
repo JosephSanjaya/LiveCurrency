@@ -2,12 +2,9 @@ package com.sanjayajoseph.livecurrency.api.interfaces
 
 import android.content.Context
 import com.sanjayajoseph.livecurrency.api.models.countries.CountriesResponse
-import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import com.sanjayajoseph.livecurrency.api.services.APIService
-import com.squareup.okhttp.ResponseBody
-import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -43,8 +40,8 @@ interface APICountriesInterface {
     ): Call<ArrayList<CountriesResponse>>
 
     @GET("alpha")
-    fun getCountriesByAlpha(
+    fun getCountriesByAlphaAsync(
         @Query("codes") codes: String
-    ): Call<ArrayList<CountriesResponse>>
+    ): Deferred<ArrayList<CountriesResponse>>
 
 }

@@ -45,10 +45,16 @@ object Constants {
     const val SOUTH_KOREAN_CURRENCY = "KRW"
     const val POLAND_CURRENCY = "PLN"
 
-    const val COUNTRIES_SUPPORTED_CODES = "CA;HK;IS;PH;DK;HU;CZ;GB;RO;SE;ID;IN;BR;RU;HR;JP;TH;CH;EU;DE;MY;BG;TR;CN;NO;NZ;ZA;US;MX;SG;AU;IL;KR;PL"
+    const val COUNTRIES_SUPPORTED_CODES =
+        "CA;HK;IS;PH;DK;HU;CZ;GB;RO;SE;ID;IN;BR;RU;HR;JP;TH;CH;EU;DE;MY;BG;TR;CN;NO;NZ;ZA;US;MX;SG;AU;IL;KR;PL"
     const val HOME_CURRENCIES_TYPE_DOWN = 0
     const val HOME_CURRENCIES_TYPE_UP = 1
     const val API_DATE_FORMAT = "yyyy-MM-dd"
     const val FREE_TYPE = "free"
     const val PREMIUM_TYPE = "premium"
+
+
+    const val LOADING_STATUS_LOAD = 100
+    const val LOADING_STATUS_SUCCESS = 200
+    const val LOADING_STATUS_FAILED = 404
 }

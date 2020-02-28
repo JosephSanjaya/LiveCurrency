@@ -1,7 +1,9 @@
 package com.sanjayajoseph.livecurrency.application.common
 
 import com.orhanobut.hawk.Hawk
+import com.sanjayajoseph.livecurrency.api.models.countries.CountriesResponse
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
+import timber.log.Timber
 
 
 /*
@@ -19,11 +21,16 @@ object Hawk {
         return Hawk.get("latestCurrencyData")
     }
 
-    fun setSupportedCountry(data: CurrenciesResponse) {
-        Hawk.put("latestCurrencyData", data)
+    fun setSupportedCountry(data: ArrayList<CountriesResponse>) {
+        Hawk.put("supportedCountries", data)
     }
 
-    fun getSupportedCountry(): CurrenciesResponse {
-        return Hawk.get("latestCurrencyData")
+    fun getSupportedCountry(): ArrayList<CountriesResponse>? {
+        return try {
+            Hawk.get("supportedCountries")
+        }catch (e: Exception) {
+            Timber.tag(Constants.TAG).e(e)
+            null
+        }
     }
 }

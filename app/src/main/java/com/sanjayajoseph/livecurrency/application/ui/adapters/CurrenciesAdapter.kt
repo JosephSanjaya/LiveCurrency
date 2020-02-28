@@ -2,24 +2,16 @@ package com.sanjayajoseph.livecurrency.application.ui.adapters
 
 import android.net.Uri
 import androidx.core.content.ContextCompat
-import com.blankj.utilcode.util.ConvertUtils
-import com.blankj.utilcode.util.StringUtils
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.sanjayajoseph.livecurrency.R
 import com.sanjayajoseph.livecurrency.api.models.currencies.entities.CurrenciesEntity
 import com.sanjayajoseph.livecurrency.application.common.Constants
-import kotlinx.android.synthetic.main.home_adapter_layout.view.*
 import timber.log.Timber
-import java.lang.Exception
-import java.text.DecimalFormat
 import java.text.NumberFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 /*
@@ -38,11 +30,14 @@ class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
         nf.isGroupingUsed = false
         when (helper?.itemViewType) {
             Constants.HOME_CURRENCIES_TYPE_DOWN -> {
-                helper.setText(R.id.tvSymbol,item?.data?.symbols.toString())
-                    .setText(R.id.tvValue,nf.format(item?.data?.value))
-                    .setText(R.id.tvDiff,nf.format(item?.diffValue)+ " %")
-                    .setText(R.id.tvStateName,item?.countryData?.alpha3Code)
-                    .setImageDrawable(R.id.ivRates, ContextCompat.getDrawable(mContext, R.drawable.ic_trending_down))
+                helper.setText(R.id.tvSymbol, item?.data?.symbols.toString())
+                    .setText(R.id.tvValue, nf.format(item?.data?.value))
+                    .setText(R.id.tvDiff, nf.format(item?.diffValue) + " %")
+                    .setText(R.id.tvStateName, item?.countryData?.alpha3Code)
+                    .setImageDrawable(
+                        R.id.ivRates,
+                        ContextCompat.getDrawable(mContext, R.drawable.ic_trending_down)
+                    )
                     .setTextColor(R.id.tvDiff, ContextCompat.getColor(mContext, R.color.colorRed))
                 try {
                     val requestBuilder = GlideToVectorYou
@@ -55,17 +50,19 @@ class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .apply(RequestOptions().circleCrop())
                         .into(helper.getView(R.id.ivFlag))
-                }catch (e: Exception)
-                {
+                } catch (e: Exception) {
                     Timber.tag(Constants.TAG).e(e)
                 }
             }
             Constants.HOME_CURRENCIES_TYPE_UP -> {
-                helper.setText(R.id.tvSymbol,item?.data?.symbols.toString())
-                    .setText(R.id.tvValue,nf.format(item?.data?.value))
-                    .setText(R.id.tvDiff,nf.format(item?.diffValue)+ " %")
-                    .setText(R.id.tvStateName,item?.countryData?.alpha3Code)
-                    .setImageDrawable(R.id.ivRates, ContextCompat.getDrawable(mContext, R.drawable.ic_trending_up))
+                helper.setText(R.id.tvSymbol, item?.data?.symbols.toString())
+                    .setText(R.id.tvValue, nf.format(item?.data?.value))
+                    .setText(R.id.tvDiff, nf.format(item?.diffValue) + " %")
+                    .setText(R.id.tvStateName, item?.countryData?.alpha3Code)
+                    .setImageDrawable(
+                        R.id.ivRates,
+                        ContextCompat.getDrawable(mContext, R.drawable.ic_trending_up)
+                    )
                     .setTextColor(R.id.tvDiff, ContextCompat.getColor(mContext, R.color.colorGreen))
                 try {
                     val requestBuilder = GlideToVectorYou
@@ -78,8 +75,7 @@ class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .apply(RequestOptions().circleCrop())
                         .into(helper.getView(R.id.ivFlag))
-                }catch (e: Exception)
-                {
+                } catch (e: Exception) {
                     Timber.tag(Constants.TAG).e(e)
                 }
             }

@@ -4,7 +4,7 @@ import android.content.Context
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import com.sanjayajoseph.livecurrency.api.services.APIService
 import com.squareup.okhttp.ResponseBody
-import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -31,24 +31,24 @@ interface APIInterface {
     }
 
     @GET("latest")
-    fun getLatestCurrencyRates(
+    fun getLatestCurrencyRatesAsync(
         @Query("base") type: String,
         @Query("symbols") service: String
-    ): Observable<CurrenciesResponse>
+    ): Deferred<CurrenciesResponse>
 
     @GET("history")
-    fun getHistoriesCurrencyRates(
+    fun getHistoriesCurrencyRatesAsync(
         @Query("start_at") startAt: String,
         @Query("end_at") endAt: String,
         @Query("base") type: String,
         @Query("symbols") service: String
-    ): Observable<ResponseBody>
+    ): Deferred<ResponseBody>
 
     @GET("{date}")
-    fun getHistoriesByDate(
+    fun getHistoriesByDateAsync(
         @Path("date") date: String,
         @Query("base") type: String,
         @Query("symbols") service: String
-        ): Observable<CurrenciesResponse>
+        ): Deferred<CurrenciesResponse>
 
 }
