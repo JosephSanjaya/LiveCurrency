@@ -1,9 +1,9 @@
 package com.sanjayajoseph.livecurrency.api.interfaces
 
 import android.content.Context
+import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesHistoriesResponse
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import com.sanjayajoseph.livecurrency.api.services.APIService
-import com.squareup.okhttp.ResponseBody
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -38,11 +38,11 @@ interface APIInterface {
 
     @GET("history")
     fun getHistoriesCurrencyRatesAsync(
-        @Query("start_at") startAt: String,
-        @Query("end_at") endAt: String,
+        @Query("start_at") startDate: String,
+        @Query("end_at") endDate: String,
         @Query("base") type: String,
         @Query("symbols") service: String
-    ): Deferred<ResponseBody>
+    ): Deferred<CurrenciesHistoriesResponse>
 
     @GET("{date}")
     fun getHistoriesByDateAsync(

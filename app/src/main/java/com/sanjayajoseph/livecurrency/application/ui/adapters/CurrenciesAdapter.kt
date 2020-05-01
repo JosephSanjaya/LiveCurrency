@@ -1,12 +1,12 @@
 package com.sanjayajoseph.livecurrency.application.ui.adapters
 
 import android.net.Uri
+import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.sanjayajoseph.livecurrency.R
 import com.sanjayajoseph.livecurrency.api.models.currencies.entities.CurrenciesEntity
 import com.sanjayajoseph.livecurrency.application.common.Constants
@@ -23,7 +23,6 @@ import java.text.NumberFormat
 
 class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
     BaseMultiItemQuickAdapter<CurrenciesEntity?, BaseViewHolder?>(data) {
-
     override fun convert(helper: BaseViewHolder?, item: CurrenciesEntity?) {
         val nf: NumberFormat = NumberFormat.getInstance()
         nf.maximumFractionDigits = 6
@@ -39,17 +38,11 @@ class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
                         ContextCompat.getDrawable(mContext, R.drawable.ic_trending_down)
                     )
                     .setTextColor(R.id.tvDiff, ContextCompat.getColor(mContext, R.color.colorRed))
+//                    .addOnClickListener(R.id.flRoot)
                 try {
-                    val requestBuilder = GlideToVectorYou
-                        .init()
-                        .with(mContext)
-                        .requestBuilder
-                    requestBuilder
-                        .load(Uri.parse(item?.countryData?.flag))
-                        .centerCrop()
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(RequestOptions().circleCrop())
-                        .into(helper.getView(R.id.ivFlag))
+                    helper.getView<ImageView>(R.id.ivFlag).load((Uri.parse(item?.countryData?.flag))){
+                        transformations(CircleCropTransformation())
+                    }
                 } catch (e: Exception) {
                     Timber.tag(Constants.TAG).e(e)
                 }
@@ -64,17 +57,11 @@ class CurrenciesAdapter(data: List<CurrenciesEntity?>?) :
                         ContextCompat.getDrawable(mContext, R.drawable.ic_trending_up)
                     )
                     .setTextColor(R.id.tvDiff, ContextCompat.getColor(mContext, R.color.colorGreen))
+//                    .addOnClickListener(R.id.flRoot)
                 try {
-                    val requestBuilder = GlideToVectorYou
-                        .init()
-                        .with(mContext)
-                        .requestBuilder
-                    requestBuilder
-                        .load(Uri.parse(item?.countryData?.flag))
-                        .centerCrop()
-                        .transition(DrawableTransitionOptions.withCrossFade())
-                        .apply(RequestOptions().circleCrop())
-                        .into(helper.getView(R.id.ivFlag))
+                    helper.getView<ImageView>(R.id.ivFlag).load((Uri.parse(item?.countryData?.flag))){
+                        transformations(CircleCropTransformation())
+                    }
                 } catch (e: Exception) {
                     Timber.tag(Constants.TAG).e(e)
                 }

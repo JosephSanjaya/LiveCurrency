@@ -34,8 +34,8 @@ android {
         applicationId "com.sanjayajoseph.livecurrency"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -88,6 +88,12 @@ android {
 
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -95,9 +101,10 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.github.4inodev:Neomorphic-FrameLayout-Android:1.0'
-    implementation 'com.google.android.gms:play-services-ads:18.3.0'
+    implementation 'com.google.android.gms:play-services-ads:19.1.0'
+    implementation 'com.allattentionhere:fabulousfilter:0.0.5'
     //region Jetpack
-    def nav_version = "2.2.1"
+    def nav_version = "2.2.2"
     def lifecycle_version = "2.2.0"
     def multidex_version = "2.0.1"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -116,16 +123,18 @@ dependencies {
     implementation 'com.blankj:utilcodex:1.26.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.45'
     implementation 'net.sourceforge.streamsupport:streamsupport:1.7.1'
+    implementation 'com.wajahatkarim3.EasyMoney-Widgets:EasyMoney-Widgets:1.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     //endregion
     //region Firebase
-    implementation 'com.google.firebase:firebase-core:17.2.2'
-    implementation 'com.google.firebase:firebase-config:19.1.1'
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
-    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-core:17.3.0'
+    implementation 'com.google.firebase:firebase-config:19.1.3'
+    implementation 'com.google.firebase:firebase-analytics:17.3.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation 'com.google.firebase:firebase-firestore:21.4.0'
-    implementation 'com.google.firebase:firebase-perf:19.0.5'
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation 'com.google.firebase:firebase-firestore:21.4.2'
+    implementation 'com.google.firebase:firebase-perf:19.0.6'
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
     //endregion
     //region Network
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
@@ -141,7 +150,7 @@ dependencies {
     //endregion
     //region Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3'
     //endregion
     //region KOIN
     implementation "org.koin:koin-core:$koin_version"
@@ -153,11 +162,10 @@ dependencies {
     implementation "org.koin:koin-androidx-ext:$koin_version"
     //endregion
     //region Image Handler
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.android.material:material:1.2.0-alpha05'
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
-    implementation 'com.github.corouteam:GlideToVectorYou:v2.0.0'
+    def coil_version = "0.9.5"
+    implementation("io.coil-kt:coil:$coil_version")
+    implementation("io.coil-kt:coil-svg:$coil_version")
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
     //endregion
     //region anko
     implementation "org.jetbrains.anko:anko:0.10.8"

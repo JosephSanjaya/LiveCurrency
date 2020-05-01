@@ -1,5 +1,6 @@
 package com.sanjayajoseph.livecurrency.api.interfaces
 
+import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesHistoriesResponse
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 
 
@@ -20,4 +21,11 @@ interface CurrenciesInterface {
         base: String,
         symbols: String
     ): ApiResult<CurrenciesResponse>
+
+    suspend fun getRatesHistories(
+        startDate: String,
+        endDate:String,
+        base: String,
+        symbols: String
+    ): ApiResult<CurrenciesHistoriesResponse>
 }

@@ -3,6 +3,7 @@ package com.sanjayajoseph.livecurrency.api.repository
 import com.sanjayajoseph.livecurrency.api.interfaces.APIInterface
 import com.sanjayajoseph.livecurrency.api.interfaces.ApiResult
 import com.sanjayajoseph.livecurrency.api.interfaces.CurrenciesInterface
+import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesHistoriesResponse
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 
 
@@ -24,7 +25,6 @@ class CurrenciesRepository(private val service: APIInterface) : CurrenciesInterf
             ApiResult.Error(ex)
         }
     }
-
     override suspend fun getRatesByDate(
         date: String,
         base: String,
@@ -32,6 +32,19 @@ class CurrenciesRepository(private val service: APIInterface) : CurrenciesInterf
     ): ApiResult<CurrenciesResponse> {
         return try {
             val result = service.getHistoriesByDateAsync(date, base, symbols).await()
+            ApiResult.Success(result)
+        } catch (ex: Exception) {
+            ApiResult.Error(ex)
+        }
+    }
+    override suspend fun getRatesHistories(
+        startDate: String,
+        endDate: String,
+        base: String,
+        symbols: String
+    ): ApiResult<CurrenciesHistoriesResponse> {
+        return try {
+            val result = service.getHistoriesCurrencyRatesAsync(startDate,endDate, base, symbols).await()
             ApiResult.Success(result)
         } catch (ex: Exception) {
             ApiResult.Error(ex)

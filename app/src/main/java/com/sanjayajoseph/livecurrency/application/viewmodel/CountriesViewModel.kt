@@ -1,12 +1,10 @@
 package com.sanjayajoseph.livecurrency.application.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.sanjayajoseph.livecurrency.api.base.BaseViewModel
+import com.sanjayajoseph.livecurrency.base.BaseViewModel
 import com.sanjayajoseph.livecurrency.api.interfaces.ApiResult
 import com.sanjayajoseph.livecurrency.api.models.countries.CountriesResponse
-import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import com.sanjayajoseph.livecurrency.api.repository.CountriesRepository
-import com.sanjayajoseph.livecurrency.api.repository.CurrenciesRepository
 import com.sanjayajoseph.livecurrency.application.common.Constants
 import kotlinx.coroutines.launch
 import timber.log.Timber

@@ -6,6 +6,23 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.sanjayajoseph.livecurrency.application.ui.fragments.HomeFragment">
-
+        <action
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out"
+            android:id="@+id/action_homeFragment_to_historiesFragment"
+            app:destination="@id/historiesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historiesFragment"
+        android:name="com.sanjayajoseph.livecurrency.application.ui.fragments.HistoriesFragment">
+        <action
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out"
+            android:id="@+id/action_historiesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

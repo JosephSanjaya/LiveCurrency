@@ -1,8 +1,9 @@
 package com.sanjayajoseph.livecurrency.application.ui.fragments
 
-import android.app.Activity
 import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -13,30 +14,25 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.api.load
+import coil.transform.CircleCropTransformation
 import com.blankj.utilcode.util.ToastUtils
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
 import com.sanjayajoseph.livecurrency.R
-import com.sanjayajoseph.livecurrency.api.interfaces.APICountriesInterface
 import com.sanjayajoseph.livecurrency.api.models.countries.CountriesResponse
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import com.sanjayajoseph.livecurrency.api.models.currencies.entities.CurrenciesEntity
-import com.sanjayajoseph.livecurrency.application.base.BaseFragment
 import com.sanjayajoseph.livecurrency.application.common.Constants
 import com.sanjayajoseph.livecurrency.application.common.Functions
-import com.sanjayajoseph.livecurrency.application.common.Hawk
 import com.sanjayajoseph.livecurrency.application.ui.adapters.CountriesAdapter
 import com.sanjayajoseph.livecurrency.application.ui.adapters.CurrenciesAdapter
 import com.sanjayajoseph.livecurrency.application.viewmodel.CountriesViewModel
 import com.sanjayajoseph.livecurrency.application.viewmodel.CurrenciesViewModel
+import com.sanjayajoseph.livecurrency.base.BaseFragment
 import com.sanjayajoseph.livecurrency.databinding.HomeLayoutBinding
 import kotlinx.android.synthetic.main.home_layout.*
 import kotlinx.android.synthetic.main.view_dialog_recycler.view.*
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 /*
 * @author Joseph Sanjaya on 2/22/2020.
@@ -47,9 +43,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseFragment() {
     private val currenciesViewModel: CurrenciesViewModel by viewModel()
     private val countriesViewModel: CountriesViewModel by viewModel()
-    private lateinit var mContext: Context
-    private lateinit var mActivity: Activity
     private lateinit var binding: HomeLayoutBinding
+    private val actionHistories: Int = R.id.action_homeFragment_to_historiesFragment
     private var currenciesDataList: ArrayList<CurrenciesEntity> = ArrayList()
     private var countriesDataList: ArrayList<CountriesResponse> = ArrayList()
     private var yesterdayCurrenciesData: CurrenciesResponse? = null
@@ -68,9 +63,55 @@ class HomeFragment : BaseFragment() {
             R.layout.home_layout, container, false
         ).apply {
         }
-        setupListener()
-        loadCurrencies(Constants.INDONESIA_CURRENCY)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.ivCountriesFlag.load(R.drawable.ic_idn){
+            transformations(CircleCropTransformation())
+        }
+        setupListener()
+        setCurrenciesObserver()
+        setCountriesObserver()
+        loadCurrencies(Constants.INDONESIA_CURRENCY)
+    }
+
+    private fun setCurrenciesObserver()
+    {
+        if (!currenciesViewModel.currenciesData.hasObservers())
+            currenciesViewModel.currenciesData.observe(viewLifecycleOwner, Observer { data ->
+            currenciesData = data
+        })
+        if (!currenciesViewModel.dateCurrenciesData.hasObservers())
+            currenciesViewModel.dateCurrenciesData.observe(viewLifecycleOwner, Observer { data ->
+            yesterdayCurrenciesData = data
+        })
+    }
+
+    private fun setCountriesObserver()
+    {
+        if (!countriesViewModel.countriesData.hasObservers())
+            countriesViewModel.countriesData.observe(viewLifecycleOwner, Observer { data ->
+            if (data != null) {
+                countriesDataList = data
+            }
+        })
+        if (!countriesViewModel.loadingCountries.hasObservers())
+            countriesViewModel.loadingCountries.observe(
+            viewLifecycleOwner,
+            Observer { loadingStatus ->
+                when (loadingStatus) {
+                    Constants.LOADING_STATUS_LOAD -> return@Observer
+                    Constants.LOADING_STATUS_SUCCESS -> countriesDataList.remove(countriesDataList.find { data -> data == null })
+                    Constants.LOADING_STATUS_FAILED -> {
+                        ToastUtils.showLong("Failed to Load Data, try Refreshing")
+                    }
+                    else -> {
+                        ToastUtils.showLong("Failed to Load Data, Unknown Error")
+                    }
+                }
+            })
     }
 
     private fun showRecyclerDialog(
@@ -97,16 +138,9 @@ class HomeFragment : BaseFragment() {
                     if (mRecyclerDialog != null && mRecyclerDialog!!.isShowing)
                         mRecyclerDialog!!.dismiss()
                     if (countriesDataList[position].name == "Singapore") {
-                        val requestBuilder = GlideToVectorYou
-                            .init()
-                            .with(mContext)
-                            .requestBuilder
-                        requestBuilder
-                            .load(Uri.parse(countriesDataList[position].flag))
-                            .centerCrop()
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(RequestOptions().circleCrop())
-                            .into(binding.ivCountriesFlag)
+                        binding.ivCountriesFlag.load(Uri.parse(countriesDataList[position].flag)){
+                            transformations(CircleCropTransformation())
+                        }
                         selectedType =
                             countriesDataList[position].currencies?.get(1)?.code.toString()
                         loadCurrencies(selectedType)
@@ -115,16 +149,9 @@ class HomeFragment : BaseFragment() {
                         binding.tvSelectedState.text =
                             countriesDataList[position].alpha2Code
                     } else {
-                        val requestBuilder = GlideToVectorYou
-                            .init()
-                            .with(mContext)
-                            .requestBuilder
-                        requestBuilder
-                            .load(Uri.parse(countriesDataList[position].flag))
-                            .centerCrop()
-                            .transition(DrawableTransitionOptions.withCrossFade())
-                            .apply(RequestOptions().circleCrop())
-                            .into(binding.ivCountriesFlag)
+                        binding.ivCountriesFlag.load(Uri.parse(countriesDataList[position].flag)){
+                            transformations(CircleCropTransformation())
+                        }
                         selectedType =
                             countriesDataList[position].currencies?.get(0)?.code.toString()
                         loadCurrencies(selectedType)
@@ -149,10 +176,37 @@ class HomeFragment : BaseFragment() {
 
 
     private fun setupListener() {
+        binding.fabConverter.setOnClickListener {
+            val dialogFrag: ConverterFragment = ConverterFragment.newInstance()
+            dialogFrag.setCountriesData(countriesDataList)
+            dialogFrag.setParentFab(binding.fabConverter)
+            dialogFrag.show((requireFragmentManager()), dialogFrag.tag)
+        }
+        binding.fabRate.setOnClickListener {
+            val uri =
+                Uri.parse("market://details?id=" + mContext?.packageName)
+            val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+            goToMarket.addFlags(
+                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            )
+            try {
+                startActivity(goToMarket)
+            } catch (e: ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + mContext?.packageName)
+                    )
+                )
+            }
+        }
+
         getCountries()
         binding.llState.setOnClickListener {
             showRecyclerDialog(
-                mContext,
+                mContext!!,
                 "Countries",
                 CountriesAdapter(R.layout.view_countries_list, countriesDataList)
             )
@@ -165,37 +219,7 @@ class HomeFragment : BaseFragment() {
     private fun getCountries() {
         countriesDataList = ArrayList()
         setupCurrenciesAdapter()
-        getCountriesRemoteData(Constants.COUNTRIES_SUPPORTED_CODES)
-    }
-
-    private fun getCountriesRemoteData(alpha : String)
-    {
-        if (countriesViewModel.countriesData.hasObservers()) countriesViewModel.countriesData.removeObservers(
-            viewLifecycleOwner
-        )
-        countriesViewModel.countriesData.observe(viewLifecycleOwner, Observer { data ->
-            if (data != null) {
-                countriesDataList = data
-            }
-        })
-        if (countriesViewModel.loadingCountries.hasObservers()) countriesViewModel.loadingCountries.removeObservers(
-            viewLifecycleOwner
-        )
-        countriesViewModel.loadingCountries.observe(
-            viewLifecycleOwner,
-            Observer { loadingStatus ->
-                when (loadingStatus) {
-                    Constants.LOADING_STATUS_LOAD -> return@Observer
-                    Constants.LOADING_STATUS_SUCCESS -> countriesDataList.remove(countriesDataList.find { data -> data == null })
-                    Constants.LOADING_STATUS_FAILED -> {
-                        ToastUtils.showLong("Failed to Load Data, try Refreshing")
-                    }
-                    else -> {
-                        ToastUtils.showLong("Failed to Load Data, Unknown Error")
-                    }
-                }
-            })
-        countriesViewModel.getCountriesByAlpha(alpha)
+        countriesViewModel.getCountriesByAlpha(Constants.COUNTRIES_SUPPORTED_CODES)
     }
 
     private fun setupCurrenciesAdapter() {
@@ -208,17 +232,17 @@ class HomeFragment : BaseFragment() {
         binding.rvHome.layoutManager = LinearLayoutManager(mContext)
         binding.rvHome.adapter = currenciesAdapter
         currenciesAdapter.notifyDataSetChanged()
+//        currenciesAdapter.setOnItemClickListener { adapter, view, position ->
+//            val bundle = Bundle()
+//            bundle.putString("base", selectedType)
+//            bundle.putString("symbols", currenciesDataList[position].data?.symbols)
+//            Functions.navigateTo(this@HomeFragment, actionHistories, bundle)
+//        }
     }
 
     private fun loadCurrencies(type: String) {
         currenciesDataList = ArrayList()
         setupCurrenciesAdapter()
-        if (currenciesViewModel.currenciesData.hasObservers()) currenciesViewModel.currenciesData.removeObservers(
-            viewLifecycleOwner
-        )
-        currenciesViewModel.currenciesData.observe(viewLifecycleOwner, Observer { data ->
-            currenciesData = data
-        })
         if (currenciesViewModel.loadingLatestCurrency.hasObservers()) currenciesViewModel.loadingLatestCurrency.removeObservers(
             viewLifecycleOwner
         )
@@ -248,12 +272,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun loadYesterdayCurrencies(type: String, date: String) {
-        if (currenciesViewModel.dateCurrenciesData.hasObservers()) currenciesViewModel.dateCurrenciesData.removeObservers(
-            viewLifecycleOwner
-        )
-        currenciesViewModel.dateCurrenciesData.observe(viewLifecycleOwner, Observer { data ->
-            yesterdayCurrenciesData = data
-        })
         if (currenciesViewModel.loadingCurrencyByDate.hasObservers()) currenciesViewModel.loadingCurrencyByDate.removeObservers(
             viewLifecycleOwner
         )
@@ -273,7 +291,7 @@ class HomeFragment : BaseFragment() {
                                 countriesDataList
                             )
                         )
-                        currenciesDataList.remove(currenciesDataList.find { data -> data.data?.symbols == type })
+                        currenciesDataList.remove(currenciesDataList.find { data -> data.data?.symbols == type ||  data.data?.value == null})
                         currenciesAdapter.notifyDataSetChanged()
                         Functions.stopRecyclerLoading(binding.shimmerViewContainer, binding.srlHome)
                     }
@@ -297,9 +315,25 @@ class HomeFragment : BaseFragment() {
         )
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
-        mActivity = context as Activity
+    override fun onDetach() {
+        super.onDetach()
+        if (currenciesViewModel.loadingCurrencyByDate.hasObservers()) currenciesViewModel.loadingCurrencyByDate.removeObservers(
+            viewLifecycleOwner
+        )
+        if (currenciesViewModel.loadingLatestCurrency.hasObservers()) currenciesViewModel.loadingLatestCurrency.removeObservers(
+            viewLifecycleOwner
+        )
+        if (currenciesViewModel.dateCurrenciesData.hasObservers()) currenciesViewModel.dateCurrenciesData.removeObservers(
+            viewLifecycleOwner
+        )
+        if (currenciesViewModel.currenciesData.hasObservers()) currenciesViewModel.currenciesData.removeObservers(
+            viewLifecycleOwner
+        )
+        if (countriesViewModel.loadingCountries.hasObservers()) countriesViewModel.loadingCountries.removeObservers(
+            viewLifecycleOwner
+        )
+        if (countriesViewModel.countriesData.hasObservers()) countriesViewModel.countriesData.removeObservers(
+            viewLifecycleOwner
+        )
     }
 }

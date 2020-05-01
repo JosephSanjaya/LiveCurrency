@@ -4,7 +4,7 @@
     package="com.sanjayajoseph.livecurrency">
 
     <application
-        android:name="com.sanjayajoseph.livecurrency.application.base.BaseApplication"
+        android:name="com.sanjayajoseph.livecurrency.base.BaseApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,7 +17,7 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-5992899851212436~4189004093"/>
-        <activity android:name="com.sanjayajoseph.livecurrency.application.base.BaseActivity"
+        <activity android:name="com.sanjayajoseph.livecurrency.base.BaseActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>

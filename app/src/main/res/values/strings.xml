@@ -4,4 +4,5 @@
     <string name="dummy">Dummy</string>
     <string name="selected_flag">Selected Flag</string>
     <string name="up_and_down_graph">Up and Down Graph</string>
+    <string name="currency_detail">Currency Detail</string>
 </resources>

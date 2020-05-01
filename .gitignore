@@ -13,3 +13,11 @@
 .externalNativeBuild
 .cxx
 .idea/
+
+app/free/app-free.aab
+
+key/livecurrency_jon.jks
+
+key/livecurrency_withads.jks
+
+key/livecurrency.jks

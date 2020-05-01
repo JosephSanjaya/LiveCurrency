@@ -2,178 +2,221 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/flCountries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_8sdp">
-
-            <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_gravity="end"
-                app:neomorph_view_type="circular"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_margin="@dimen/_10sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_gear"/>
-            </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textSize="@dimen/_14ssp"
-                android:layout_gravity="center"
-                android:textStyle="bold"
-                android:gravity="center"/>
-
-
-        </FrameLayout>
-
-        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-            android:layout_width="@dimen/_170sdp"
-            android:layout_height="@dimen/_170sdp"
-            android:layout_gravity="center"
-            app:neomorph_view_type="circular">
-
-            <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_150sdp"
-                android:layout_gravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:neomorph_view_type="circular">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_gravity="center">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:id="@+id/llState"
-                        android:orientation="horizontal">
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/ivCountriesFlag"
-                            android:layout_width="@dimen/values_large"
-                            android:layout_height="@dimen/values_large"
-                            android:contentDescription="@string/selected_flag"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_idn"
-                            android:layout_marginEnd="@dimen/values_regular"/>
-                        <TextView
-                            android:id="@+id/tvSelectedState"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/values_regular"
-                            android:singleLine="true"
-                            android:text="ID"
-                            android:textSize="@dimen/font_regular_small" />
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="@dimen/_10sdp"
-                            android:layout_height="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/values_regular"
-                            android:src="@drawable/ic_down_arrow"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.5"
-                            app:layout_constraintStart_toEndOf="@+id/tvSelectedState"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tvSelectedCurrency"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="IDR"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_30ssp" />
-
-                </LinearLayout>
-            </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
-
-
-        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_margin="@dimen/_8sdp"
-                android:src="@drawable/ic_money"
-                android:contentDescription="@string/dummy" />
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
+            <FrameLayout
+                android:id="@+id/flCountries"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Exchange Rates"
-                android:textStyle="bold"
-                android:layout_gravity="center"/>
+                android:layout_marginBottom="@dimen/_8sdp">
 
-        </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            android:background="@color/colorGreySoft"/>
+                <TextView
+                    android:paddingTop="@dimen/values_regular"
+                    android:paddingBottom="@dimen/values_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_view_container"
-            android:layout_width="match_parent"
-            app:shimmer_auto_start="false"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_margin="@dimen/values_small"
+                    app:neomorph_view_type="circular">
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabConverter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="0dp"
+                        app:elevation="0dp"
+                        android:src="@drawable/ic_exchange"
+                        app:backgroundTint="@color/colorPrimary" />
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/values_small"
+                    app:neomorph_view_type="circular">
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="0dp"
+                        app:elevation="0dp"
+                        android:src="@drawable/ic_favorite"
+                        app:backgroundTint="@color/colorPrimary" />
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
 
-            <!-- Adding 7 rows of placeholders -->
+            </FrameLayout>
+
+            <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                android:layout_width="@dimen/_170sdp"
+                android:layout_height="@dimen/_170sdp"
+                android:layout_gravity="center"
+                app:neomorph_view_type="circular">
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:neomorph_view_type="circular">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/llState"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/ivCountriesFlag"
+                                android:layout_width="@dimen/values_large"
+                                android:layout_height="@dimen/values_large"
+                                android:layout_marginEnd="@dimen/values_regular"
+                                android:contentDescription="@string/selected_flag"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_idn" />
+
+                            <TextView
+                                android:id="@+id/tvSelectedState"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/values_regular"
+                                android:singleLine="true"
+                                android:text="ID"
+                                android:textSize="@dimen/font_regular_small" />
+
+                            <ImageView
+                                android:id="@+id/imageView"
+                                android:layout_width="@dimen/_10sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/values_regular"
+                                android:src="@drawable/ic_down_arrow"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/tvSelectedState"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvSelectedCurrency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IDR"
+                            android:textSize="@dimen/_30ssp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+            </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <include layout="@layout/home_adapter_loading" />
-                <include layout="@layout/home_adapter_loading" />
-                <include layout="@layout/home_adapter_loading" />
-                <include layout="@layout/home_adapter_loading" />
-                <include layout="@layout/home_adapter_loading" />
-                <include layout="@layout/home_adapter_loading" />
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:contentDescription="@string/dummy"
+                    android:src="@drawable/ic_money" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Exchange Rates"
+                    android:textStyle="bold" />
+
             </LinearLayout>
 
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/srlHome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvHome"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    </LinearLayout>
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:background="@color/colorGreySoft" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:shimmer_auto_start="false">
+
+                <!-- Adding 7 rows of placeholders -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/home_adapter_loading" />
+
+                    <include layout="@layout/home_adapter_loading" />
+
+                    <include layout="@layout/home_adapter_loading" />
+
+                    <include layout="@layout/home_adapter_loading" />
+
+                    <include layout="@layout/home_adapter_loading" />
+
+                    <include layout="@layout/home_adapter_loading" />
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/srlHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

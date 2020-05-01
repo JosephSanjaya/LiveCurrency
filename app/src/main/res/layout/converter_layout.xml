@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.allattentionhere.fabulousfilter.AAH_FilterView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:visibility="invisible"
+        tools:ignore="MissingPrefix"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/values_medium"
+                android:textSize="@dimen/font_medium"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:text="Currencies Converter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_regular_small"
+                android:layout_gravity="center"
+                android:text="Touch on flag to change country" />
+
+
+        </LinearLayout>
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:id="@+id/flClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            app:neomorph_view_type="circular">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                android:src="@drawable/ic_close"
+                app:backgroundTint="@color/colorPrimary"
+                app:elevation="0dp" />
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+        <LinearLayout
+            android:id="@+id/llCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvInfo"
+            android:layout_marginTop="@dimen/values_medium"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:translationZ="10dp"
+                    app:neomorph_view_type="circular">
+
+                    <ImageView
+                        android:id="@+id/ivCountriesFlag"
+                        android:layout_width="@dimen/values_xxlarge"
+                        android:layout_height="@dimen/values_xxlarge"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/values_small"
+                        android:contentDescription="@string/selected_flag"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_idn" />
+
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="-60dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/values_medium"
+                        android:paddingStart="@dimen/_40sdp">
+
+                        <com.wajahatkarim3.easymoneywidgets.EasyMoneyEditText
+                            android:id="@+id/etCurrency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:hint="Input Here"
+                            android:inputType="numberDecimal"
+                            app:show_currency="false"
+                            app:show_commas="true"
+                            android:maxWidth="@dimen/_170sdp"
+                            android:minWidth="@dimen/_100sdp"
+                            android:singleLine="false"
+                            android:textColorHint="@color/colorGreySoft"
+                            android:textSize="@dimen/font_regular" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvCurrency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="@dimen/values_medium"
+                        android:text="IDR"
+                        android:textSize="@dimen/font_regular"
+                        android:textStyle="bold" />
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvTargetCurrency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivConvert"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/values_large"
+            android:layout_below="@+id/llCurrency"
+            android:src="@drawable/ic_down_arrow"/>
+
+        <LinearLayout
+            android:id="@+id/llTarget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivConvert"
+            android:layout_marginTop="@dimen/values_medium"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:translationZ="10dp"
+                    app:neomorph_view_type="circular">
+
+                    <ImageView
+                        android:id="@+id/ivTargetCountriesFlag"
+                        android:layout_width="@dimen/values_xxlarge"
+                        android:layout_height="@dimen/values_xxlarge"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/values_small"
+                        android:contentDescription="@string/selected_flag"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_usa" />
+
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+                <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="-60dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/values_medium"
+                        android:paddingStart="@dimen/_40sdp">
+
+                        <com.wajahatkarim3.easymoneywidgets.EasyMoneyEditText
+                            android:id="@+id/etTarget"
+                            android:focusable="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:hint="Result shown here"
+                            android:inputType="numberDecimal"
+                            app:show_currency="false"
+                            app:show_commas="true"
+                            android:maxWidth="@dimen/_170sdp"
+                            android:minWidth="@dimen/_100sdp"
+                            android:singleLine="false"
+                            android:textColorHint="@color/colorGreySoft"
+                            android:textSize="@dimen/font_regular" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvTarget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="@dimen/values_medium"
+                        android:text="USD"
+                        android:textSize="@dimen/font_regular"
+                        android:textStyle="bold" />
+                </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.chinodev.androidneomorphframelayout.NeomorphFrameLayout
+            android:layout_width="match_parent"
+            android:layout_below="@id/llTarget"
+            android:layout_marginTop="@dimen/values_regular"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnConvert"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/values_small"
+                android:elevation="0dp"
+                android:background="@color/colorPrimary"
+                android:text="Convert"/>
+
+        </com.chinodev.androidneomorphframelayout.NeomorphFrameLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:weightSum="2">
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</com.allattentionhere.fabulousfilter.AAH_FilterView>

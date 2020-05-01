@@ -1,7 +1,7 @@
 package com.sanjayajoseph.livecurrency.application.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.sanjayajoseph.livecurrency.api.base.BaseViewModel
+import com.sanjayajoseph.livecurrency.base.BaseViewModel
 import com.sanjayajoseph.livecurrency.api.interfaces.ApiResult
 import com.sanjayajoseph.livecurrency.api.models.currencies.base.CurrenciesResponse
 import com.sanjayajoseph.livecurrency.api.repository.CurrenciesRepository

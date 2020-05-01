@@ -1,6 +1,10 @@
 package com.sanjayajoseph.livecurrency.application.common
 
+import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.blankj.utilcode.util.ToastUtils
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -48,6 +52,21 @@ object Functions {
         return sdf.format(c.time)
     }
 
+    fun navigateTo(fragment: Fragment, destination: Int) {
+        try {
+            NavHostFragment.findNavController(fragment).navigate(destination)
+        } catch (e: java.lang.Exception) {
+            Timber.tag("Failed Navigating").e(e)
+        }
+    }
+
+    fun navigateTo(fragment: Fragment, destination: Int, bundle: Bundle) {
+        try {
+            NavHostFragment.findNavController(fragment).navigate(destination, bundle)
+        } catch (e: java.lang.Exception) {
+            Timber.tag("Failed Navigating").e(e)
+        }
+    }
     private fun calculateChanges(current: Double, yesterday: Double): Double {
         return ((current / yesterday) * 100) - 100
     }
@@ -76,7 +95,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.CANADIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.CANADIAN_CURRENCY }!! }
             }
             Constants.HONGKONG_CURRENCY -> {
                 if (currenciesData.currenciesRates?.hongkongCurrency != null && yesterdayCurrenciesData.currenciesRates?.hongkongCurrency != null) {
@@ -93,7 +112,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.HONGKONG_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.HONGKONG_CURRENCY }!! }
             }
             Constants.ICELANDIC_CURRENCY -> {
                 if (currenciesData.currenciesRates?.icelandicCurrency != null && yesterdayCurrenciesData.currenciesRates?.icelandicCurrency != null) {
@@ -110,7 +129,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.ICELANDIC_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.ICELANDIC_CURRENCY }!! }
             }
             Constants.PHILIPPINE_CURRENCY -> {
                 if (currenciesData.currenciesRates?.philippineCurrency != null && yesterdayCurrenciesData.currenciesRates?.philippineCurrency != null) {
@@ -127,7 +146,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.PHILIPPINE_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.PHILIPPINE_CURRENCY }!! }
             }
             Constants.DANISH_CURRENCY -> {
                 if (currenciesData.currenciesRates?.danishCurrency != null && yesterdayCurrenciesData.currenciesRates?.danishCurrency != null) {
@@ -144,7 +163,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.DANISH_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.DANISH_CURRENCY }!! }
             }
             Constants.HUNGARIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.hungarianCurrency != null && yesterdayCurrenciesData.currenciesRates?.hungarianCurrency != null) {
@@ -161,7 +180,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.HUNGARIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.HUNGARIAN_CURRENCY }!! }
             }
             Constants.CZECH_CURRENCY -> {
                 if (currenciesData.currenciesRates?.czechCurrency != null && yesterdayCurrenciesData.currenciesRates?.czechCurrency != null) {
@@ -178,7 +197,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.CZECH_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.CZECH_CURRENCY }!! }
             }
             Constants.BRITISH_CURRENCY -> {
                 if (currenciesData.currenciesRates?.britishCurrency != null && yesterdayCurrenciesData.currenciesRates?.britishCurrency != null) {
@@ -195,7 +214,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.BRITISH_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.BRITISH_CURRENCY }!! }
             }
             Constants.ROMANIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.romanianCurrency != null && yesterdayCurrenciesData.currenciesRates?.romanianCurrency != null) {
@@ -212,7 +231,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.ROMANIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.ROMANIAN_CURRENCY }!! }
             }
             Constants.SWEDISH_CURRENCY -> {
                 if (currenciesData.currenciesRates?.swedishCurrency != null && yesterdayCurrenciesData.currenciesRates?.swedishCurrency != null) {
@@ -229,7 +248,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.SWEDISH_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.SWEDISH_CURRENCY }!! }
             }
             Constants.INDONESIA_CURRENCY -> {
                 if (currenciesData.currenciesRates?.indonesiaCurrency != null && yesterdayCurrenciesData.currenciesRates?.indonesiaCurrency != null) {
@@ -246,7 +265,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.INDONESIA_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.INDONESIA_CURRENCY }!! }
             }
             Constants.INDIA_CURRENCY -> {
                 if (currenciesData.currenciesRates?.indianCurrecy != null && yesterdayCurrenciesData.currenciesRates?.indianCurrecy != null) {
@@ -263,7 +282,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.INDIA_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.INDIA_CURRENCY }!! }
             }
             Constants.BRAZILLIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.brazillianCurrency != null && yesterdayCurrenciesData.currenciesRates?.brazillianCurrency != null) {
@@ -280,7 +299,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.BRAZILLIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.BRAZILLIAN_CURRENCY }!! }
             }
             Constants.RUSSIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.russianCurrency != null && yesterdayCurrenciesData.currenciesRates?.russianCurrency != null) {
@@ -297,7 +316,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.RUSSIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.RUSSIAN_CURRENCY }!! }
             }
             Constants.CROATIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.croatianCurrency != null && yesterdayCurrenciesData.currenciesRates?.croatianCurrency != null) {
@@ -314,7 +333,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.CROATIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.CROATIAN_CURRENCY }!! }
             }
             Constants.JAPAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.japanCurrency != null && yesterdayCurrenciesData.currenciesRates?.japanCurrency != null) {
@@ -331,7 +350,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.JAPAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.JAPAN_CURRENCY }!! }
             }
             Constants.THAI_CURRENCY -> {
                 if (currenciesData.currenciesRates?.thaiCurrency != null && yesterdayCurrenciesData.currenciesRates?.thaiCurrency != null) {
@@ -348,7 +367,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.THAI_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.THAI_CURRENCY }!! }
             }
             Constants.SWISH_CURRENCY -> {
                 if (currenciesData.currenciesRates?.swishCurrency != null && yesterdayCurrenciesData.currenciesRates?.swishCurrency != null) {
@@ -365,7 +384,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.SWISH_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.SWISH_CURRENCY }!! }
             }
             Constants.EUROPEAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.europeanCurrency != null && yesterdayCurrenciesData.currenciesRates?.europeanCurrency != null) {
@@ -382,7 +401,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.EUROPEAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.EUROPEAN_CURRENCY }!! }
             }
             Constants.MALAYSIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.malaysianCurrency != null && yesterdayCurrenciesData.currenciesRates?.malaysianCurrency != null) {
@@ -399,7 +418,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.MALAYSIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.MALAYSIAN_CURRENCY }!! }
             }
             Constants.BULGARIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.bulgarianCurrency != null && yesterdayCurrenciesData.currenciesRates?.bulgarianCurrency != null) {
@@ -416,7 +435,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.BULGARIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.BULGARIAN_CURRENCY }!! }
             }
             Constants.TURKISH_CURRENCY -> {
                 if (currenciesData.currenciesRates?.turkishCurrency != null && yesterdayCurrenciesData.currenciesRates?.turkishCurrency != null) {
@@ -433,7 +452,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.TURKISH_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.TURKISH_CURRENCY }!! }
             }
             Constants.CHINESE_CURRENCY -> {
                 if (currenciesData.currenciesRates?.chinaCurrency != null && yesterdayCurrenciesData.currenciesRates?.chinaCurrency != null) {
@@ -450,7 +469,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.CHINESE_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.CHINESE_CURRENCY }!! }
             }
             Constants.NORWEGIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.norwegianCurrency != null && yesterdayCurrenciesData.currenciesRates?.norwegianCurrency != null) {
@@ -467,7 +486,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.NORWEGIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.NORWEGIAN_CURRENCY }!! }
             }
             Constants.NEW_ZEALAND_CURRENCY -> {
                 if (currenciesData.currenciesRates?.newZealandCurrency != null && yesterdayCurrenciesData.currenciesRates?.newZealandCurrency != null) {
@@ -484,7 +503,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.NEW_ZEALAND_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.NEW_ZEALAND_CURRENCY }!! }
             }
             Constants.SOUTH_AFRICAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.southAfricanCurrency != null && yesterdayCurrenciesData.currenciesRates?.southAfricanCurrency != null) {
@@ -501,7 +520,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.SOUTH_AFRICAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.SOUTH_AFRICAN_CURRENCY }!! }
             }
             Constants.US_CURRENCY -> {
                 if (currenciesData.currenciesRates?.usCurrency != null && yesterdayCurrenciesData.currenciesRates?.usCurrency != null) {
@@ -518,7 +537,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.US_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.US_CURRENCY }!! }
             }
             Constants.MEXICAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.mexicanCurrency != null && yesterdayCurrenciesData.currenciesRates?.mexicanCurrency != null) {
@@ -535,7 +554,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.MEXICAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.MEXICAN_CURRENCY }!! }
             }
             Constants.SINGAPORE_CURRENCY -> {
                 if (currenciesData.currenciesRates?.singaporeCurrency != null && yesterdayCurrenciesData.currenciesRates?.singaporeCurrency != null) {
@@ -552,7 +571,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.SINGAPORE_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.SINGAPORE_CURRENCY }!! }
             }
             Constants.AUSTRALIAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.australianCurrency != null && yesterdayCurrenciesData.currenciesRates?.australianCurrency != null) {
@@ -569,7 +588,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.AUSTRALIAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.AUSTRALIAN_CURRENCY }!! }
             }
             Constants.ISRAEL_CURRENCY -> {
                 if (currenciesData.currenciesRates?.israelCurrency != null && yesterdayCurrenciesData.currenciesRates?.israelCurrency != null) {
@@ -586,7 +605,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.ISRAEL_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.ISRAEL_CURRENCY }!! }
             }
             Constants.SOUTH_KOREAN_CURRENCY -> {
                 if (currenciesData.currenciesRates?.southKoreanCurrency != null && yesterdayCurrenciesData.currenciesRates?.southKoreanCurrency != null) {
@@ -603,7 +622,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.SOUTH_KOREAN_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.SOUTH_KOREAN_CURRENCY }!! }
             }
             Constants.POLAND_CURRENCY -> {
                 if (currenciesData.currenciesRates?.polandCurrency != null && yesterdayCurrenciesData.currenciesRates?.polandCurrency != null) {
@@ -620,7 +639,7 @@ object Functions {
                 }
                 tempEntity.data = tempData
                 tempEntity.countryData =
-                    countryData.first { data -> data.currencies?.any { currency -> currency?.code == Constants.POLAND_CURRENCY }!! }
+                    countryData.firstOrNull { data -> data.currencies?.any { currency -> currency?.code == Constants.POLAND_CURRENCY }!! }
             }
         }
         return tempEntity
@@ -911,6 +930,17 @@ object Functions {
         shimmerFrameLayout.startShimmer()
         shimmerFrameLayout.visibility = View.VISIBLE
         swipeRefreshLayout.visibility = View.GONE
+    }
+
+
+    fun setupBackButtonHandler(action: Runnable, fragment: Fragment, enableBack: Boolean) {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(enableBack /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    action.run()
+                }
+            }
+        fragment.requireActivity().onBackPressedDispatcher.addCallback(fragment, callback)
     }
 
     fun stopRecyclerLoading(
